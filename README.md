@@ -22,7 +22,7 @@ STEP 6: Use zscore of to remove outliers
 
 # Coding and Output
 
-## Data Cleaning
+## 1. Data Cleaning
 
 ```
 import pandas as pd
@@ -82,7 +82,59 @@ sns.heatmap(df.isnull(), yticklabels=False, annot=True)
 ![Screenshot 2025-04-17 094656](https://github.com/user-attachments/assets/81b626fe-f702-477d-aabf-f5af7ca06930)
 
 
-## Oulier Detection & Removal
+## 2. Oulier Detection & Removal
+
+```
+import pandas as pd
+import numpy as np
+import seaborn as sns
+
+age=[1,3,28,27,25,92,30,39,40,50,26,24,29,94]
+af=pd.DataFrame(age)
+af
+```
+![image](https://github.com/user-attachments/assets/1be5cb8b-cac9-4927-8229-594ead371b40)
+```
+sns.boxplot(data=af)
+```
+![image](https://github.com/user-attachments/assets/7961157f-e107-47c4-a29d-913ee41f253a)
+```
+q1=af.quantile(0.25)
+q3=af.quantile(0.75)
+iqr=q3-q1
+iqr
+
+ub=q3+(1.5*iqr)
+lb=q1-(1.5*iqr)
+print(ub)
+print(lb)
+
+outliers=[x for x in age if x<lb.item() or x>ub.item()]
+outliers
+
+print("Q1 :",q1)
+print("Q3 : ",q3)
+print("IQR :",iqr)
+print("Upper Bound :",ub)
+print("Lower Bound :",lb)
+print("Outliers :",outliers)
+```
+![image](https://github.com/user-attachments/assets/c4c66dec-5d3d-4f3a-be5e-e7056d6ab832)
+```
+af=af[((af>=lb)&(af<=ub))]
+af
+```
+![image](https://github.com/user-attachments/assets/3c4d62e2-3d93-40e7-a41a-404d62c1f260)
+```
+af.dropna()
+```
+![image](https://github.com/user-attachments/assets/ed41fcc5-c144-4495-b6e8-952cc208e2d1)
+```
+sns.boxplot(data=af)
+```
+![image](https://github.com/user-attachments/assets/3dbafcea-fe5f-41af-8b77-95d326696cc7)
+
 
 # Result
-          <<include your Result here>>
+Successfully read the given data and performed data cleaning and outlier detection and removal process.
+
