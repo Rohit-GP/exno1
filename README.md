@@ -22,6 +22,8 @@ STEP 6: Use zscore of to remove outliers
 
 # Coding and Output
 
+Done by : ROHIT GP - 212224220082 / 24900185
+
 ## 1. Data Cleaning
 
 ```
